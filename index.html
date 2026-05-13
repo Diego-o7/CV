@@ -14,61 +14,106 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f1f5f9;
+            background: #e2e8f0;
             color: #0f172a;
             transition: background 0.3s ease, color 0.2s ease;
             line-height: 1.5;
             scroll-behavior: smooth;
+            position: relative;
+            z-index: 0;
+            overflow-x: hidden;
+        }
+
+        /* Formas difuminadas de fondo para el efecto cristal */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: #7c3aed;
+            top: -10%;
+            left: -10%;
+        }
+
+        body::after {
+            width: 600px;
+            height: 600px;
+            background: #38bdf8;
+            bottom: -20%;
+            right: -10%;
         }
 
         /* modo oscuro */
         body.dark-mode {
-            background: #0a0c10;
+            background: #020617;
             color: #e2e8f0;
         }
 
-        /* contenedor principal ancho máximo */
+        body.dark-mode::before {
+            background: #4c1d95;
+            opacity: 0.4;
+        }
+
+        body.dark-mode::after {
+            background: #0369a1;
+            opacity: 0.4;
+        }
+
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        /*Boton de tema*/
+        /* Clase base de Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        body.dark-mode .glass-panel {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== BOTÓN TEMA ===== */
         .theme-switch {
             position: fixed;
             top: 1.5rem;
             right: 2rem;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(8px);
             border-radius: 60px;
-            width: 48px;
+            width: 60px;
             height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 1000;
-            font-size: 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
             transition: 0.2s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.25);
         }
-        body.dark-mode .theme-switch {
-            background: #1e293b;
-            border-color: #334155;
+        .theme-switch:hover {
+            transform: scale(1.05);
         }
 
         /* header hero */
         .hero {
             text-align: center;
             padding: 5rem 0 3rem;
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
             border-radius: 0 0 2rem 2rem;
             margin-bottom: 2rem;
-        }
-        body.dark-mode .hero {
-            background: linear-gradient(145deg, #0f172a 0%, #111827 100%);
         }
         .hero h1 {
             font-size: 3.2rem;
@@ -79,20 +124,20 @@
             color: transparent;
             letter-spacing: -0.02em;
         }
+        body.dark-mode .hero h1 {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
         .hero p {
             font-size: 1.2rem;
             margin-top: 0.8rem;
-            color: #1e293b;
-            font-weight: 400;
-        }
-        body.dark-mode .hero p {
-            color: #cbd5e1;
+            font-weight: 500;
         }
 
         /* nav moderno */
         .navbar {
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(12px);
             border-radius: 60px;
             padding: 0.6rem 1.8rem;
             margin: 1rem auto 2rem auto;
@@ -100,27 +145,19 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        body.dark-mode .navbar {
-            background: rgba(15,23,42,0.85);
-            border-color: #334155;
         }
         .navbar a {
             text-decoration: none;
             font-weight: 600;
-            color: #1e293b;
+            color: inherit;
             padding: 0.5rem 1rem;
             border-radius: 40px;
             transition: 0.2s;
         }
-        body.dark-mode .navbar a {
-            color: #e2e8f0;
-        }
         .navbar a:hover {
-            background: #2563eb;
+            background: rgba(37, 99, 235, 0.8);
             color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         .nav-wrapper {
             display: flex;
@@ -137,9 +174,13 @@
             margin-bottom: 2rem;
             border-left: 6px solid #2563eb;
             padding-left: 1.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        body.dark-mode .section-title {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        
+        /* acerca de (diseño dual) */
         .about-grid {
             display: flex;
             gap: 3rem;
@@ -155,14 +196,15 @@
         .hexagon {
             width: 220px;
             height: 250px;
-            background: linear-gradient(145deg, #2563eb, #7c3aed);
+            background: linear-gradient(145deg, rgba(37,99,235,0.5), rgba(124,58,237,0.5));
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             transition: transform 0.3s;
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
         }
         .hexagon:hover {
             transform: scale(1.02);
@@ -172,6 +214,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+            opacity: 0.9;
         }
         .about-text {
             flex: 2;
@@ -179,60 +222,52 @@
         .about-text p {
             margin-bottom: 1rem;
             font-size: 1.05rem;
-        }
-        .highlight {
-            background: rgba(37,99,235,0.1);
-            padding: 0.2rem 0.4rem;
-            border-radius: 12px;
             font-weight: 500;
         }
 
         /* tarjeta educación minimal */
         .edu-card {
-            background: white;
             border-radius: 28px;
             padding: 1.8rem;
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-            border: 1px solid #e2e8f0;
             transition: all 0.2s;
         }
-        body.dark-mode .edu-card {
-            background: #111827;
-            border-color: #1e293b;
-        }
         .edu-icon {
-            font-size: 3rem;
+            font-size: 2rem;
+            background: rgba(37,99,235,0.2);
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        body.dark-mode .edu-icon {
+            border-color: rgba(255,255,255,0.1);
         }
         .edu-card p {
             font-size: 1.2rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* grid habilidades*/
+        /* grid habilidades (moderno cards) */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.8rem;
         }
         .skill-card {
-            background: white;
             border-radius: 2rem;
             padding: 1.5rem;
             transition: all 0.25s;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.02);
-        }
-        body.dark-mode .skill-card {
-            background: #0f172a;
-            border-color: #1e293b;
         }
         .skill-card:hover {
             transform: translateY(-6px);
-            border-color: #2563eb50;
-            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.1);
+            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.45);
+        }
+        body.dark-mode .skill-card:hover {
+            background: rgba(30, 41, 59, 0.7);
+            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.5);
         }
         .skill-card dt {
             font-weight: 700;
@@ -243,39 +278,38 @@
             -webkit-background-clip: text;
             color: transparent;
         }
+        body.dark-mode .skill-card dt {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
         .skill-card dd {
-            color: #334155;
+            font-weight: 500;
             line-height: 1.5;
         }
-        body.dark-mode .skill-card dd {
-            color: #cbd5e6;
-        }
 
-        /* proyectos */
+        /* proyectos estilo masonry / moderno */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         .project-item {
-            background: white;
             border-radius: 28px;
             overflow: hidden;
             transition: 0.2s;
-            border: 1px solid #eef2ff;
-            box-shadow: 0 10px 15px -6px rgba(0,0,0,0.05);
         }
-        body.dark-mode .project-item {
-            background: #0f172a;
-            border-color: #1e293b;
+        .project-item:hover {
+            transform: translateY(-4px);
         }
         .project-header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: rgba(0, 0, 0, 0.05);
             padding: 1.2rem;
-            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
         body.dark-mode .project-header {
-            background: linear-gradient(135deg, #0f172a, #020617);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .project-header h3 {
             font-weight: 700;
@@ -286,32 +320,27 @@
         }
         .project-content p {
             margin-bottom: 1rem;
+            font-weight: 500;
         }
         .chip {
             display: inline-block;
-            background: #e2e8f0;
+            background: rgba(255, 255, 255, 0.5);
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-size: 0.75rem;
             font-weight: 600;
-            color: #1e293b;
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-right: 0.5rem;
         }
         body.dark-mode .chip {
-            background: #334155;
-            color: #f1f5f9;
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(255,255,255,0.1);
         }
 
-        
+        /* formulario elegante */
         .contact-form {
-            background: white;
             border-radius: 2rem;
             padding: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-        }
-        body.dark-mode .contact-form {
-            background: #111827;
-            border-color: #1e293b;
         }
         .form-group {
             margin-bottom: 1.5rem;
@@ -325,34 +354,48 @@
             width: 100%;
             padding: 0.9rem 1rem;
             border-radius: 1.2rem;
-            border: 1px solid #cbd5e1;
-            background: #fefefe;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.4);
             font-family: inherit;
+            color: inherit;
             transition: 0.2s;
+            backdrop-filter: blur(4px);
         }
         body.dark-mode input, body.dark-mode textarea {
-            background: #1e293b;
-            border-color: #334155;
-            color: #f1f5f9;
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
         }
         input:focus, textarea:focus {
             outline: none;
             border-color: #2563eb;
+            background: rgba(255, 255, 255, 0.7);
             box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
         }
+        body.dark-mode input:focus, body.dark-mode textarea:focus {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96,165,250,0.2);
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(15, 23, 42, 0.5);
+        }
+        body.dark-mode input::placeholder, body.dark-mode textarea::placeholder {
+            color: rgba(226, 232, 240, 0.5);
+        }
         button {
-            background: #2563eb;
+            background: rgba(37, 99, 235, 0.85);
             color: white;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.3);
             padding: 0.85rem 2rem;
             border-radius: 2rem;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
             font-size: 1rem;
+            backdrop-filter: blur(4px);
         }
         button:hover {
-            background: #1d4ed8;
+            background: rgba(29, 78, 216, 0.95);
             transform: scale(0.98);
         }
 
@@ -360,7 +403,7 @@
         .footer {
             margin-top: 4rem;
             padding: 2rem 0;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
             text-align: center;
             display: flex;
             justify-content: space-between;
@@ -368,12 +411,12 @@
             gap: 1rem;
         }
         body.dark-mode .footer {
-            border-top-color: #1e293b;
+            border-top-color: rgba(255, 255, 255, 0.1);
         }
         .social-links a {
             color: #2563eb;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             margin: 0 0.8rem;
         }
         body.dark-mode .social-links a {
@@ -411,35 +454,28 @@
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            background: #0f172a;
-            color: white;
             padding: 0.7rem 1.5rem;
             border-radius: 60px;
             font-size: 0.9rem;
             z-index: 2000;
-            backdrop-filter: blur(10px);
-            font-weight: 500;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-        }
-        body.dark-mode .toast-msg {
-            background: #1e293b;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <div class="theme-switch" id="themeToggle" aria-label="Cambiar tema">
-        🌙
+    <div class="theme-switch glass-panel" id="themeToggle" aria-label="Cambiar tema">
+        Tema
     </div>
 
     <div class="container">
-        <div class="hero">
+        <div class="hero glass-panel">
             <h1>Diego Chavez Martinez</h1>
-            <p>Ingeniería en Sistemas Electrónicos Inteligentes </p>
+            <p>Ingeniería en Sistemas Electrónicos Inteligentes</p>
         </div>
 
-        <!-- Navegación centrada -->
         <div class="nav-wrapper">
-            <div class="navbar">
+            <div class="navbar glass-panel">
                 <a href="#sobre-mi">Sobre mí</a>
                 <a href="#educacion">Educación</a>
                 <a href="#habilidades">Habilidades</a>
@@ -449,73 +485,66 @@
         </div>
 
         <main>
-            <!-- Sobre mí rediseñado -->
             <section id="sobre-mi">
                 <h2 class="section-title">Sobre mí</h2>
                 <div class="about-grid">
                     <div class="about-image">
                         <div class="hexagon">
-                            <!-- Imagen de perfil, si no existe se ve un placeholder elegante -->
                             <img src="img/perfil.jpg" alt="Diego Chavez" onerror="this.src='https://ui-avatars.com/api/?background=2563eb&color=fff&name=Diego+Chavez&size=200'">
                         </div>
                     </div>
                     <div class="about-text">
                         <p>Soy estudiante apasionado de Ingeniería en Sistemas Electrónicos Inteligentes, con enfoque en automatización, inteligencia artificial y sistemas embebidos. Desarrollo soluciones que integran hardware y software para resolver problemas del mundo real.</p>
                         <p>Actualmente lidero un emprendimiento de importación y análisis de inversiones, combinando la visión tecnológica con estrategias de negocio. Me motiva la optimización continua, el aprendizaje constante y la construcción de proyectos que fusionen electrónica, machine learning y desarrollo web.</p>
-                        
                     </div>
                 </div>
             </section>
 
-            <!-- Educación  -->
             <section id="educacion">
                 <h2 class="section-title">Formación</h2>
-                <div class="edu-card">
+                <div class="edu-card glass-panel">
                     <div class="edu-icon">🎓</div>
-                    <p><strong>Ingeniería en Sistemas Electrónicos Inteligentes</strong> — Universidad Autonoma de Ciudad Juarez (2022 - Actualidad) <br> <span style="font-size:0.9rem; opacity:0.8;">Especialización en IA embebida, IoT y automatización avanzada.</span></p>
+                    <p><strong>Ingeniería en Sistemas Electrónicos Inteligentes</strong> — Universidad (2022 - Actualidad) <br> <span style="font-size:0.9rem; opacity:0.8;">Especialización en IA embebida, IoT y automatización avanzada.</span></p>
                 </div>
             </section>
 
-            <!-- Habilidades:  -->
             <section id="habilidades">
                 <h2 class="section-title">Competencias técnicas</h2>
                 <div class="skills-grid">
-                    <div class="skill-card"><dt>💻 Lenguajes de Programación</dt><dd>C, C++, Python, MATLAB, HTML, CSS, JavaScript – desarrollo de sistemas embebidos, scripts de análisis y full stack básico.</dd></div>
-                    <div class="skill-card"><dt>🌐 Desarrollo Web</dt><dd>Flask, HTML5, CSS3, JavaScript. Creación de dashboards, servidores locales y visualización de datos en tiempo real.</dd></div>
-                    <div class="skill-card"><dt>📡 Electrónica & IoT</dt><dd>ESP32, ADC, PWM, NeoPixel, sensores, comunicación serial y diseño de sistemas de monitoreo remoto.</dd></div>
-                    <div class="skill-card"><dt>🧠 Machine Learning</dt><dd>PyTorch, redes neuronales, preprocesamiento de datos, validación y modelos predictivos aplicados a salud y señales.</dd></div>
-                    <div class="skill-card"><dt>🎨 Diseño y Edición</dt><dd>Edición digital, diagramación técnica, maquetación de presentaciones y prototipado visual.</dd></div>
-                    <div class="skill-card"><dt>🛠️ Herramientas</dt><dd>Git, GitHub, VS Code, Google Colab, MATLAB, Office 365. Gestión de versiones y documentación colaborativa.</dd></div>
+                    <div class="skill-card glass-panel"><dt>💻Lenguajes de Programación</dt><dd>C, C++, Python, MATLAB, HTML, CSS, JavaScript – desarrollo de sistemas embebidos, scripts de análisis y full stack básico.</dd></div>
+                    <div class="skill-card glass-panel"><dt>🌐Desarrollo Web</dt><dd>Flask, HTML5, CSS3, JavaScript. Creación de dashboards, servidores locales y visualización de datos en tiempo real.</dd></div>
+                    <div class="skill-card glass-panel"><dt>📡Electrónica & IoT</dt><dd>ESP32, ADC, PWM, NeoPixel, sensores, comunicación serial y diseño de sistemas de monitoreo remoto.</dd></div>
+                    <div class="skill-card glass-panel"><dt>🧠Machine Learning</dt><dd>PyTorch, redes neuronales, preprocesamiento de datos, validación y modelos predictivos aplicados a salud y señales.</dd></div>
+                    <div class="skill-card glass-panel"><dt>🎨Diseño y Edición</dt><dd>Edición digital, diagramación técnica, maquetación de presentaciones y prototipado visual.</dd></div>
+                    <div class="skill-card glass-panel"><dt>🛠️Herramientas</dt><dd>Git, GitHub, VS Code, Google Colab, MATLAB, Office 365. Gestión de versiones y documentación colaborativa.</dd></div>
                 </div>
             </section>
 
-            <!-- Proyectos -->
             <section id="proyectos">
                 <h2 class="section-title">Proyectos destacados</h2>
                 <div class="projects-grid">
-                    <div class="project-item">
-                        <div class="project-header"><h3>📡 Cliente-Servidor con ESP32</h3></div>
-                        <div class="project-content"><p>Sistema completo de monitoreo que envía datos desde sensores (temperatura, humedad, etc) mediante ESP32 a un servidor Flask. Visualización en tiempo real con gráficas y alertas configurables.</p><span class="chip">IoT</span> <span class="chip">Flask</span></div>
+                    <div class="project-item glass-panel">
+                        <div class="project-header"><h3>📡Cliente-Servidor con ESP32</h3></div>
+                        <div class="project-content"><p>Sistema completo de monitoreo que envía datos desde sensores mediante ESP32 a un servidor Flask. Visualización en tiempo real con gráficas y alertas configurables.</p><span class="chip">IoT</span> <span class="chip">Flask</span></div>
                     </div>
-                    <div class="project-item">
-                        <div class="project-header"><h3>🧬 Predicción de Diabetes</h3></div>
-                        <div class="project-content"><p>Red neuronal profunda con PyTorch que analiza métricas médicas para predecir riesgo de diabetes. Incluye normalización, entrenamiento y evaluación con exactitud del 85% en validación.</p><span class="chip">Machine Learning</span><span class="chip">PyTorch</span></div>
+                    <div class="project-item glass-panel">
+                        <div class="project-header"><h3>🧬Predicción de Diabetes</h3></div>
+                        <div class="project-content"><p>Red neuronal profunda con PyTorch que analiza métricas médicas para predecir riesgo de diabetes. Incluye normalización, entrenamiento y evaluación con exactitud del 85%.</p><span class="chip">Machine Learning</span><span class="chip">PyTorch</span></div>
                     </div>
-                    <div class="project-item">
-                        <div class="project-header"><h3>⚠️ Monitoreo ADC + Alarmas</h3></div>
-                        <div class="project-content"><p>Utilización del ADC del ESP32 para lectura de sensores analógicos, sistema de alarma visual con LEDs y control PWM. Gráficas locales en tiempo real mediante WebSocket liviano.</p><span class="chip">Embedded</span><span class="chip">ESP32</span></div>
+                    <div class="project-item glass-panel">
+                        <div class="project-header"><h3>⚠️Monitoreo ADC + Alarmas</h3></div>
+                        <div class="project-content"><p>Utilización del ADC del ESP32 para lectura de sensores analógicos, sistema de alarma visual con LEDs y control PWM. Gráficas locales en tiempo real mediante WebSocket.</p><span class="chip">Embedded</span><span class="chip">ESP32</span></div>
                     </div>
-                    <div class="project-item">
-                        <div class="project-header"><h3>📦 Emprendimiento de Importación</h3></div>
-                        <div class="project-content"><p>Gestión integral de negocio propio de productos importados: análisis de demanda, control de inventarios, estrategias de expansión y ROI. Aplicación de principios de optimización y datos.</p><span class="chip">Negocios</span><span class="chip">Data-Driven</span></div>
+                    <div class="project-item glass-panel">
+                        <div class="project-header"><h3>📦Emprendimiento de Importación</h3></div>
+                        <div class="project-content"><p>Gestión integral de negocio propio de productos importados: análisis de demanda, control de inventarios, estrategias de expansión y ROI. Aplicación de principios de optimización.</p><span class="chip">Negocios</span><span class="chip">Data-Driven</span></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Contacto -->
             <section id="contacto">
                 <h2 class="section-title">Conversemos</h2>
-                <div class="contact-form">
+                <div class="contact-form glass-panel">
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="nombre">Nombre completo</label>
@@ -527,9 +556,9 @@
                         </div>
                         <div class="form-group">
                             <label for="mensaje">Mensaje</label>
-                            <textarea id="mensaje" rows="4" placeholder="¿Proyecto, colaboración o asesoría? Escríbeme..."></textarea>
+                            <textarea id="mensaje" rows="4" placeholder="Detalles del proyecto o colaboración..."></textarea>
                         </div>
-                        <button type="submit" id="submitBtn">Enviar mensaje ✉️</button>
+                        <button type="submit" id="submitBtn">Enviar mensaje</button>
                     </form>
                 </div>
             </section>
@@ -545,19 +574,18 @@
     </div>
 
     <script>
-        // ---- Dark mode mejorado + persistencia ----
+        // ---- Dark mode persistencia ----
         const themeBtn = document.getElementById('themeToggle');
         const body = document.body;
-        const iconSpan = document.getElementById('themeToggle'); // mismo div
 
         function setTheme(isDark) {
             if (isDark) {
                 body.classList.add('dark-mode');
-                iconSpan.innerHTML = '☀️';
+                themeBtn.textContent = 'Claro';
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.remove('dark-mode');
-                iconSpan.innerHTML = '🌙';
+                themeBtn.textContent = 'Oscuro';
                 localStorage.setItem('theme', 'light');
             }
         }
@@ -577,7 +605,7 @@
             setTheme(!isDark);
         });
 
-        // ---- Formulario con alerta suave ----
+        // ---- Formulario con alerta ----
         const form = document.getElementById('contactForm');
         const nombreInput = document.getElementById('nombre');
         const emailInput = document.getElementById('email');
@@ -587,13 +615,13 @@
             const existingToast = document.querySelector('.toast-msg');
             if (existingToast) existingToast.remove();
             const toast = document.createElement('div');
-            toast.className = 'toast-msg';
+            toast.className = 'toast-msg glass-panel';
             toast.textContent = message;
             if (isError) {
-                toast.style.background = '#b91c1c';
+                toast.style.background = 'rgba(220, 38, 38, 0.8)';
                 toast.style.color = 'white';
             } else {
-                toast.style.background = '#0f172a';
+                toast.style.color = 'inherit';
             }
             document.body.appendChild(toast);
             setTimeout(() => {
@@ -609,16 +637,16 @@
             const mensaje = mensajeInput.value.trim();
 
             if (!nombre || !email || !mensaje) {
-                showToast('⚠️ Por favor completa todos los campos.', true);
+                showToast('Por favor completa todos los campos.', true);
                 return;
             }
             if (!email.includes('@') || !email.includes('.')) {
-                showToast('📧 Ingresa un correo válido.', true);
+                showToast('Ingresa un correo válido.', true);
                 return;
             }
 
             // simulación de envío exitoso
-            showToast(`✨ Gracias ${nombre}, tu mensaje ha sido enviado. Pronto me pondré en contacto.`, false);
+            showToast(`Gracias ${nombre}, tu mensaje ha sido enviado. Pronto me pondré en contacto.`, false);
             form.reset();
         });
         
@@ -634,7 +662,6 @@
             });
         });
 
-        // efecto para los enlaces del footer 
         const footerLinks = document.querySelectorAll('.social-links a');
         footerLinks.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -642,4 +669,5 @@
         });
     </script>
 </body>
+</html>
 </html>
