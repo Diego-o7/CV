@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Diego Chavez | Ingeniería en Sistemas Electrónicos Inteligentes</title>
-    <!-- Fuentes modernas y reset ligero -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -35,7 +34,7 @@
             padding: 0 2rem;
         }
 
-        /* ===== BOTÓN TEMA ===== */
+        /*Boton de tema*/
         .theme-switch {
             position: fixed;
             top: 1.5rem;
@@ -140,7 +139,7 @@
             padding-left: 1.2rem;
         }
 
-        /* acerca de (diseño dual) */
+        
         .about-grid {
             display: flex;
             gap: 3rem;
@@ -212,7 +211,7 @@
             font-weight: 500;
         }
 
-        /* grid habilidades (moderno cards) */
+        /* grid habilidades*/
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -252,7 +251,7 @@
             color: #cbd5e6;
         }
 
-        /* proyectos estilo masonry / moderno */
+        /* proyectos */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -302,7 +301,7 @@
             color: #f1f5f9;
         }
 
-        /* formulario elegante */
+        
         .contact-form {
             background: white;
             border-radius: 2rem;
@@ -433,7 +432,6 @@
     </div>
 
     <div class="container">
-        <!-- Hero header -->
         <div class="hero">
             <h1>Diego Chavez Martinez</h1>
             <p>Ingeniería en Sistemas Electrónicos Inteligentes | Innovación, IA & IoT</p>
@@ -469,7 +467,7 @@
                 </div>
             </section>
 
-            <!-- Educación moderna -->
+            <!-- Educación  -->
             <section id="educacion">
                 <h2 class="section-title">Formación</h2>
                 <div class="edu-card">
@@ -478,7 +476,7 @@
                 </div>
             </section>
 
-            <!-- Habilidades: más estructurado y profesional -->
+            <!-- Habilidades:  -->
             <section id="habilidades">
                 <h2 class="section-title">Competencias técnicas</h2>
                 <div class="skills-grid">
@@ -491,7 +489,7 @@
                 </div>
             </section>
 
-            <!-- Proyectos con diseño más atractivo -->
+            <!-- Proyectos -->
             <section id="proyectos">
                 <h2 class="section-title">Proyectos destacados</h2>
                 <div class="projects-grid">
@@ -514,7 +512,7 @@
                 </div>
             </section>
 
-            <!-- Contacto con feedback dinámico -->
+            <!-- Contacto -->
             <section id="contacto">
                 <h2 class="section-title">Conversemos</h2>
                 <div class="contact-form">
@@ -636,12 +634,10 @@
             });
         });
 
-        // efecto para los enlaces del footer (no son smooth por defecto pero lo aplicamos)
+        // efecto para los enlaces del footer 
         const footerLinks = document.querySelectorAll('.social-links a');
         footerLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                // solo prevent si es interno? los links son externos, no interferimos
-                // dejamos que abran en nueva pestaña por target blank
             });
         });
     </script>
