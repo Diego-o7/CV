@@ -581,11 +581,11 @@
         function setTheme(isDark) {
             if (isDark) {
                 body.classList.add('dark-mode');
-                themeBtn.textContent = 'Claro';
+                themeBtn.textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.remove('dark-mode');
-                themeBtn.textContent = 'Oscuro';
+                themeBtn.textContent = '🌙';
                 localStorage.setItem('theme', 'light');
             }
         }
@@ -645,12 +645,11 @@
                 return;
             }
 
-            // simulación de envío exitoso
+           
             showToast(`Gracias ${nombre}, tu mensaje ha sido enviado. Pronto me pondré en contacto.`, false);
             form.reset();
         });
         
-        // navegación suave al hacer clic en los enlaces del navbar
         document.querySelectorAll('.navbar a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
