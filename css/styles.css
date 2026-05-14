@@ -1,4 +1,4 @@
-/* ===== RESET Y BASE ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -17,19 +17,16 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* ===== MODO OSCURO ===== */
 body.dark-mode {
     background-color: #1a1a1c;
     color: #d2d2d7;
     background-image: radial-gradient(circle at center, #242426 0%, #1a1a1c 100%);
 }
 
-/* ===== OFFSET PARA ANCLAJES (evita que el nav sticky tape el título) ===== */
 section[id] {
     scroll-margin-top: 90px;
 }
 
-/* ===== SECCIONES PRINCIPALES ===== */
 .pantalla {
     min-height: 80vh;
     display: flex;
@@ -52,7 +49,6 @@ section[id] {
     }
 }
 
-/* ===== HEADER ===== */
 header {
     text-align: center;
     padding: 120px 20px 60px;
@@ -75,7 +71,6 @@ body.dark-mode header p {
     color: #a0a0a8;
 }
 
-/* ===== NAVEGACIÓN STICKY ===== */
 nav {
     position: sticky;
     top: 0;
@@ -122,7 +117,6 @@ nav a:hover {
     transform: translateY(-2px);
 }
 
-/* ===== TÍTULOS DE SECCIÓN ===== */
 section h2 {
     font-size: 42px;
     margin-bottom: 50px;
@@ -133,7 +127,6 @@ section h2 {
     font-weight: 700;
 }
 
-/* ===== SOBRE MÍ - HEXÁGONO ===== */
 .hex-wrapper {
     width: 250px;
     height: 250px;
@@ -167,7 +160,6 @@ section h2 {
     margin: 0 auto 20px;
 }
 
-/* ===== TARJETA DE EDUCACIÓN ===== */
 .tarjeta-educacion {
     max-width: 800px;
     margin: 0 auto;
@@ -195,7 +187,6 @@ section h2 {
     font-size: 48px;
 }
 
-/* ===== GRIDS ===== */
 .grid-habilidades,
 .grid-proyectos {
     display: grid;
@@ -203,7 +194,6 @@ section h2 {
     gap: 25px;
 }
 
-/* ===== TARJETAS DE HABILIDADES Y PROYECTOS ===== */
 .card-skill,
 article {
     padding: 35px;
@@ -236,7 +226,6 @@ article p {
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* ===== COLORES DE TARJETAS (estilo personal) ===== */
 .card-emerald {
     background-color: #223c30;
     border-top: 4px solid #437a5f;
@@ -262,7 +251,6 @@ article p {
     border-top: 4px solid #5a6675;
 }
 
-/* ===== MODO CLARO: AJUSTE DE SOMBRAS EN TARJETAS ===== */
 body:not(.dark-mode) .card-skill,
 body:not(.dark-mode) article {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
@@ -274,7 +262,6 @@ body:not(.dark-mode) article p {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* ===== FORMULARIO ===== */
 form {
     display: flex;
     flex-direction: column;
@@ -332,7 +319,6 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.2);
 }
 
-/* ===== BOTONES ===== */
 button {
     padding: 16px;
     border: none;
@@ -357,7 +343,6 @@ button:active {
     transform: translateY(0);
 }
 
-/* ===== FOOTER ===== */
 footer {
     text-align: center;
     padding: 60px 20px;
@@ -389,7 +374,6 @@ footer a:hover {
     transform: translateY(-2px);
 }
 
-/* ===== SWITCH (BOTÓN DE TEMA) ===== */
 .switch {
     position: fixed;
     top: 20px;
@@ -435,7 +419,6 @@ body:not(.dark-mode) .slider {
     background-color: #d4af37;
 }
 
-/* ===== ACCESIBILIDAD: FOCO VISIBLE ===== */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -446,7 +429,6 @@ textarea:focus-visible,
     border-radius: 4px;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     html {
         font-size: 15px;
@@ -573,19 +555,15 @@ textarea:focus-visible,
     }
 }
 
-/* ===== UTILIDADES ADICIONALES ===== */
-/* Mejora la legibilidad de enlaces internos */
 a[href^="#"] {
     scroll-behavior: smooth;
 }
 
-/* Evita que el contenido se desplace bruscamente */
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* Estilo para scrollbar personalizado (opcional) */
 ::-webkit-scrollbar {
     width: 10px;
 }
