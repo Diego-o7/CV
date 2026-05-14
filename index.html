@@ -93,7 +93,7 @@
             top: 1.5rem;
             right: 2rem;
             border-radius: 60px;
-            width: 60px;
+            padding: 0 1rem;
             height: 48px;
             display: flex;
             align-items: center;
@@ -240,9 +240,14 @@
             padding: 1rem;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
         }
         body.dark-mode .edu-icon {
             border-color: rgba(255,255,255,0.1);
+            color: #60a5fa;
         }
         .edu-card p {
             font-size: 1.2rem;
@@ -337,10 +342,74 @@
             border-color: rgba(255,255,255,0.1);
         }
 
-        /* formulario elegante */
+        /* ===== SECCIÓN CONTACTO DUAL ===== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        /* Tarjeta de Información */
+        .contact-info-card {
+            border-radius: 2rem;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .contact-heading {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .contact-desc {
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        .contact-icon {
+            background: rgba(37,99,235,0.1);
+            padding: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #2563eb;
+        }
+        body.dark-mode .contact-icon {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.1);
+            color: #e2e8f0;
+        }
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            font-weight: 700;
+        }
+        .contact-text p {
+            opacity: 0.8;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Formulario original */
         .contact-form {
             border-radius: 2rem;
-            padding: 2rem;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .form-group {
             margin-bottom: 1.5rem;
@@ -393,6 +462,7 @@
             transition: 0.2s;
             font-size: 1rem;
             backdrop-filter: blur(4px);
+            width: 100%;
         }
         button:hover {
             background: rgba(29, 78, 216, 0.95);
@@ -423,7 +493,26 @@
             color: #60a5fa;
         }
 
+        /* micro animaciones */
+        .toast-msg {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            z-index: 2000;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
         /* ajustes responsive */
+        @media (max-width: 900px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
         @media (max-width: 760px) {
             .container {
                 padding: 0 1.2rem;
@@ -446,26 +535,18 @@
             .section-title {
                 font-size: 1.8rem;
             }
-        }
-
-        /* micro animaciones */
-        .toast-msg {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0.7rem 1.5rem;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            z-index: 2000;
-            font-weight: 600;
-            transition: opacity 0.3s ease;
+            .contact-info-card, .contact-form {
+                padding: 1.5rem;
+            }
+            .contact-heading {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="theme-switch glass-panel" id="themeToggle" aria-label="Cambiar tema">
-        Tema
+        Modo Oscuro
     </div>
 
     <div class="container">
@@ -503,7 +584,9 @@
             <section id="educacion">
                 <h2 class="section-title">Formación</h2>
                 <div class="edu-card glass-panel">
-                    <div class="edu-icon">🎓</div>
+                    <div class="edu-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                    </div>
                     <p><strong>Ingeniería en Sistemas Electrónicos Inteligentes</strong> — Universidad (2022 - Actualidad) <br> <span style="font-size:0.9rem; opacity:0.8;">Especialización en IA embebida, IoT y automatización avanzada.</span></p>
                 </div>
             </section>
@@ -511,12 +594,12 @@
             <section id="habilidades">
                 <h2 class="section-title">Competencias técnicas</h2>
                 <div class="skills-grid">
-                    <div class="skill-card glass-panel"><dt>💻Lenguajes de Programación</dt><dd>C, C++, Python, MATLAB, HTML, CSS, JavaScript – desarrollo de sistemas embebidos, scripts de análisis y full stack básico.</dd></div>
-                    <div class="skill-card glass-panel"><dt>🌐Desarrollo Web</dt><dd>Flask, HTML5, CSS3, JavaScript. Creación de dashboards, servidores locales y visualización de datos en tiempo real.</dd></div>
-                    <div class="skill-card glass-panel"><dt>📡Electrónica & IoT</dt><dd>ESP32, ADC, PWM, NeoPixel, sensores, comunicación serial y diseño de sistemas de monitoreo remoto.</dd></div>
-                    <div class="skill-card glass-panel"><dt>🧠Machine Learning</dt><dd>PyTorch, redes neuronales, preprocesamiento de datos, validación y modelos predictivos aplicados a salud y señales.</dd></div>
-                    <div class="skill-card glass-panel"><dt>🎨Diseño y Edición</dt><dd>Edición digital, diagramación técnica, maquetación de presentaciones y prototipado visual.</dd></div>
-                    <div class="skill-card glass-panel"><dt>🛠️Herramientas</dt><dd>Git, GitHub, VS Code, Google Colab, MATLAB, Office 365. Gestión de versiones y documentación colaborativa.</dd></div>
+                    <div class="skill-card glass-panel"><dt>Lenguajes de Programación</dt><dd>C, C++, Python, MATLAB, HTML, CSS, JavaScript – desarrollo de sistemas embebidos, scripts de análisis y full stack básico.</dd></div>
+                    <div class="skill-card glass-panel"><dt>Desarrollo Web</dt><dd>Flask, HTML5, CSS3, JavaScript. Creación de dashboards, servidores locales y visualización de datos en tiempo real.</dd></div>
+                    <div class="skill-card glass-panel"><dt>Electrónica & IoT</dt><dd>ESP32, ADC, PWM, NeoPixel, sensores, comunicación serial y diseño de sistemas de monitoreo remoto.</dd></div>
+                    <div class="skill-card glass-panel"><dt>Machine Learning</dt><dd>PyTorch, redes neuronales, preprocesamiento de datos, validación y modelos predictivos aplicados a salud y señales.</dd></div>
+                    <div class="skill-card glass-panel"><dt>Diseño y Edición</dt><dd>Edición digital, diagramación técnica, maquetación de presentaciones y prototipado visual.</dd></div>
+                    <div class="skill-card glass-panel"><dt>Herramientas</dt><dd>Git, GitHub, VS Code, Google Colab, MATLAB, Office 365. Gestión de versiones y documentación colaborativa.</dd></div>
                 </div>
             </section>
 
@@ -524,19 +607,19 @@
                 <h2 class="section-title">Proyectos destacados</h2>
                 <div class="projects-grid">
                     <div class="project-item glass-panel">
-                        <div class="project-header"><h3>📡Cliente-Servidor con ESP32</h3></div>
+                        <div class="project-header"><h3>Cliente-Servidor con ESP32</h3></div>
                         <div class="project-content"><p>Sistema completo de monitoreo que envía datos desde sensores mediante ESP32 a un servidor Flask. Visualización en tiempo real con gráficas y alertas configurables.</p><span class="chip">IoT</span> <span class="chip">Flask</span></div>
                     </div>
                     <div class="project-item glass-panel">
-                        <div class="project-header"><h3>🧬Predicción de Diabetes</h3></div>
+                        <div class="project-header"><h3>Predicción de Diabetes</h3></div>
                         <div class="project-content"><p>Red neuronal profunda con PyTorch que analiza métricas médicas para predecir riesgo de diabetes. Incluye normalización, entrenamiento y evaluación con exactitud del 85%.</p><span class="chip">Machine Learning</span><span class="chip">PyTorch</span></div>
                     </div>
                     <div class="project-item glass-panel">
-                        <div class="project-header"><h3>⚠️Monitoreo ADC + Alarmas</h3></div>
+                        <div class="project-header"><h3>Monitoreo ADC + Alarmas</h3></div>
                         <div class="project-content"><p>Utilización del ADC del ESP32 para lectura de sensores analógicos, sistema de alarma visual con LEDs y control PWM. Gráficas locales en tiempo real mediante WebSocket.</p><span class="chip">Embedded</span><span class="chip">ESP32</span></div>
                     </div>
                     <div class="project-item glass-panel">
-                        <div class="project-header"><h3>📦Emprendimiento de Importación</h3></div>
+                        <div class="project-header"><h3>Emprendimiento de Importación</h3></div>
                         <div class="project-content"><p>Gestión integral de negocio propio de productos importados: análisis de demanda, control de inventarios, estrategias de expansión y ROI. Aplicación de principios de optimización.</p><span class="chip">Negocios</span><span class="chip">Data-Driven</span></div>
                     </div>
                 </div>
@@ -544,22 +627,59 @@
 
             <section id="contacto">
                 <h2 class="section-title">Conversemos</h2>
-                <div class="contact-form glass-panel">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo</label>
-                            <input type="text" id="nombre" placeholder="Diego Martinez" required>
+                <div class="contact-wrapper">
+                    
+                    <!-- NUEVA TARJETA DE INFORMACIÓN -->
+                    <div class="contact-info-card glass-panel">
+                        <h2 class="contact-heading">¿Trabajamos juntos?</h2>
+                        <p class="contact-desc">Estoy disponible para colaborar en proyectos de ingeniería y desarrollo de software de alto impacto.</p>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Ubicación</h4>
+                                <p>Ciudad Juárez, Chihuahua, México</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Correo electrónico</label>
-                            <input type="email" id="email" placeholder="diego@ejemplo.com" required>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>al225527@alumnos.uanj.mx</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="mensaje">Mensaje</label>
-                            <textarea id="mensaje" rows="4" placeholder="Detalles del proyecto o colaboración..."></textarea>
-                        </div>
-                        <button type="submit" id="submitBtn">Enviar mensaje</button>
-                    </form>
+                    </div>
+
+                    <!-- FORMULARIO ORIGINAL -->
+                    <div class="contact-form glass-panel">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo</label>
+                                <input type="text" id="nombre" placeholder="Diego Martinez" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico</label>
+                                <input type="email" id="email" placeholder="diego@ejemplo.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" rows="4" placeholder="Detalles del proyecto o colaboración..."></textarea>
+                            </div>
+                            <button type="submit" id="submitBtn">Enviar mensaje</button>
+                        </form>
+                    </div>
+
                 </div>
             </section>
         </main>
@@ -581,11 +701,11 @@
         function setTheme(isDark) {
             if (isDark) {
                 body.classList.add('dark-mode');
-                themeBtn.textContent = '☀️';
+                themeBtn.textContent = 'Modo Claro';
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.remove('dark-mode');
-                themeBtn.textContent = '🌙';
+                themeBtn.textContent = 'Modo Oscuro';
                 localStorage.setItem('theme', 'light');
             }
         }
@@ -605,7 +725,7 @@
             setTheme(!isDark);
         });
 
-        // ---- Formulario con alerta ----
+        // ---- Formulario con alerta original restaurado ----
         const form = document.getElementById('contactForm');
         const nombreInput = document.getElementById('nombre');
         const emailInput = document.getElementById('email');
@@ -645,11 +765,11 @@
                 return;
             }
 
-           
             showToast(`Gracias ${nombre}, tu mensaje ha sido enviado. Pronto me pondré en contacto.`, false);
             form.reset();
         });
         
+        // ---- Navegacion suave original ----
         document.querySelectorAll('.navbar a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -668,5 +788,4 @@
         });
     </script>
 </body>
-</html>
 </html>
