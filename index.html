@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* Formas difuminadas de fondo para el efecto cristal */
+      
         body::before, body::after {
             content: '';
             position: fixed;
@@ -50,7 +50,6 @@
             right: -10%;
         }
 
-        /* modo oscuro */
         body.dark-mode {
             background: #020617;
             color: #e2e8f0;
@@ -72,7 +71,7 @@
             padding: 0 2rem;
         }
 
-        /* Clase base de Glassmorphism */
+   
         .glass-panel {
             background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(16px);
@@ -87,7 +86,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
         }
 
-        /* ===== BOTÓN TEMA ===== */
+     
         .theme-switch {
             position: fixed;
             top: 1.5rem;
@@ -108,7 +107,7 @@
             transform: scale(1.05);
         }
 
-        /* header hero */
+
         .hero {
             text-align: center;
             padding: 5rem 0 3rem;
@@ -136,7 +135,7 @@
             font-weight: 500;
         }
 
-        /* nav moderno */
+     
         .navbar {
             border-radius: 60px;
             padding: 0.6rem 1.8rem;
@@ -254,7 +253,7 @@
             font-weight: 600;
         }
 
-        /* grid habilidades (moderno cards) */
+  
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -293,7 +292,6 @@
             line-height: 1.5;
         }
 
-        /* proyectos estilo masonry / moderno */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -342,7 +340,7 @@
             border-color: rgba(255,255,255,0.1);
         }
 
-        /* ===== SECCIÓN CONTACTO DUAL ===== */
+    
         .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -493,7 +491,7 @@
             color: #60a5fa;
         }
 
-        /* micro animaciones */
+       
         .toast-msg {
             position: fixed;
             bottom: 2rem;
@@ -629,10 +627,9 @@
                 <h2 class="section-title">Conversemos</h2>
                 <div class="contact-wrapper">
                     
-                    <!-- NUEVA TARJETA DE INFORMACIÓN -->
                     <div class="contact-info-card glass-panel">
-                        <h2 class="contact-heading">¿Trabajamos juntos?</h2>
-                        <p class="contact-desc">Estoy disponible para colaborar en proyectos de ingeniería y desarrollo de software de alto impacto.</p>
+                        <h2 class="contact-heading">Contacto</h2>
+                        <p class="contact-desc">Estoy disponible para nuevos proyectos e inverisones.</p>
                         
                         <div class="contact-item">
                             <div class="contact-icon">
@@ -694,18 +691,18 @@
     </div>
 
     <script>
-        // ---- Dark mode persistencia ----
+      
         const themeBtn = document.getElementById('themeToggle');
         const body = document.body;
 
         function setTheme(isDark) {
             if (isDark) {
                 body.classList.add('dark-mode');
-                themeBtn.textContent = 'Modo Claro';
+                themeBtn.textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.remove('dark-mode');
-                themeBtn.textContent = 'Modo Oscuro';
+                themeBtn.textContent = '🌙';
                 localStorage.setItem('theme', 'light');
             }
         }
@@ -725,7 +722,7 @@
             setTheme(!isDark);
         });
 
-        // ---- Formulario con alerta original restaurado ----
+     
         const form = document.getElementById('contactForm');
         const nombreInput = document.getElementById('nombre');
         const emailInput = document.getElementById('email');
@@ -769,7 +766,7 @@
             form.reset();
         });
         
-        // ---- Navegacion suave original ----
+    
         document.querySelectorAll('.navbar a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
