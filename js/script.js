@@ -1,8 +1,7 @@
-// ===== MODO OSCURO/CLARO CON MEJOR MANEJO =====
+
 const botonTema = document.getElementById("temaBtn");
 const iconoTema = document.getElementById("iconoTema");
 
-// Función para aplicar el tema
 function aplicarTema(tema) {
     if (tema === "claro") {
         document.body.classList.remove("dark-mode");
@@ -15,15 +14,14 @@ function aplicarTema(tema) {
     }
 }
 
-// Revisar tema guardado o preferencia del sistema
 const temaGuardado = localStorage.getItem("tema");
 const prefiereOscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 if (temaGuardado) {
-    // Si hay tema guardado, usarlo
+  
     aplicarTema(temaGuardado);
 } else {
-    // Si no hay tema guardado, usar preferencia del sistema
+    
     if (prefiereOscuro) {
         aplicarTema("oscuro");
     } else {
@@ -31,7 +29,7 @@ if (temaGuardado) {
     }
 }
 
-// Evento para cambiar tema manualmente
+
 botonTema.addEventListener("click", () => {
     const estaOscuro = document.body.classList.contains("dark-mode");
     if (estaOscuro) {
@@ -41,16 +39,14 @@ botonTema.addEventListener("click", () => {
     }
 });
 
-// ===== FORMULARIO CON VALIDACIONES MEJORADAS =====
+
 const formulario = document.getElementById("formulario");
 
-// Función para mostrar mensajes de error elegantes (opcional)
 function mostrarError(input, mensaje) {
-    // Eliminar error anterior si existe
+    
     const errorAnterior = input.parentElement.querySelector(".error-mensaje");
     if (errorAnterior) errorAnterior.remove();
     
-    // Crear nuevo mensaje de error
     const error = document.createElement("span");
     error.className = "error-mensaje";
     error.textContent = mensaje;
@@ -59,18 +55,15 @@ function mostrarError(input, mensaje) {
     error.style.marginTop = "5px";
     error.style.display = "block";
     
-    // Marcar input como inválido
     input.style.borderColor = "#e74c3c";
     input.parentElement.appendChild(error);
     
-    // Limpiar error después de 3 segundos
     setTimeout(() => {
         if (error.parentElement) error.remove();
         input.style.borderColor = "";
     }, 3000);
 }
 
-// Función para limpiar errores de un input
 function limpiarError(input) {
     const error = input.parentElement.querySelector(".error-mensaje");
     if (error) error.remove();
@@ -90,7 +83,6 @@ formulario.addEventListener("submit", (e) => {
     
     let esValido = true;
     
-    // Validar nombre (mínimo 2 caracteres, solo letras y espacios)
     if (nombreValue === "") {
         mostrarError(nombre, "❌ Por favor, ingresa tu nombre completo.");
         esValido = false;
@@ -104,7 +96,6 @@ formulario.addEventListener("submit", (e) => {
         limpiarError(nombre);
     }
     
-    // Validar correo electrónico (más robusto)
     const validarCorreo = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
     if (correoValue === "") {
         mostrarError(correo, "❌ Por favor, ingresa tu correo electrónico.");
@@ -115,8 +106,7 @@ formulario.addEventListener("submit", (e) => {
     } else {
         limpiarError(correo);
     }
-    
-    // Validar mensaje (mínimo 10 caracteres)
+
     if (mensajeValue === "") {
         mostrarError(mensaje, "❌ Por favor, escribe un mensaje.");
         esValido = false;
@@ -130,9 +120,8 @@ formulario.addEventListener("submit", (e) => {
         limpiarError(mensaje);
     }
     
-    // Si todo es válido, mostrar mensaje de éxito y limpiar formulario
     if (esValido) {
-        // Crear notificación personalizada (más elegante que alert)
+       
         const notificacion = document.createElement("div");
         notificacion.textContent = "✅ ¡Mensaje enviado correctamente! Me pondré en contacto contigo pronto.";
         notificacion.style.cssText = `
@@ -152,13 +141,11 @@ formulario.addEventListener("submit", (e) => {
         
         document.body.appendChild(notificacion);
         
-        // Limpiar formulario
         formulario.reset();
         limpiarError(nombre);
         limpiarError(correo);
         limpiarError(mensaje);
         
-        // Eliminar notificación después de 3 segundos
         setTimeout(() => {
             notificacion.style.opacity = "0";
             setTimeout(() => notificacion.remove(), 300);
@@ -166,7 +153,6 @@ formulario.addEventListener("submit", (e) => {
     }
 });
 
-// ===== VALIDACIÓN EN TIEMPO REAL (mientras el usuario escribe) =====
 const nombreInput = document.getElementById("nombre");
 const correoInput = document.getElementById("email");
 const mensajeInput = document.getElementById("mensaje");
@@ -190,7 +176,6 @@ mensajeInput.addEventListener("input", () => {
     }
 });
 
-// ===== EFECTO DE SCROLL SUAVE PARA ENLACES INTERNOS (mejora compatibilidad) =====
 document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -198,7 +183,7 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         const targetElement = document.querySelector(targetId);
         
         if (targetElement) {
-            const offsetTop = targetElement.offsetTop - 80; // Ajuste para nav sticky
+            const offsetTop = targetElement.offsetTop - 80; 
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -207,19 +192,15 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== ANIMACIÓN SUTIL AL CARGAR LA PÁGINA =====
 document.addEventListener("DOMContentLoaded", () => {
-    // Añadir clase para animaciones progresivas (opcional)
     const secciones = document.querySelectorAll(".pantalla");
     secciones.forEach((seccion, index) => {
         seccion.style.animationDelay = `${index * 0.1}s`;
     });
 });
 
-// ===== DETECTAR CAMBIOS EN PREFERENCIA DEL SISTEMA =====
 const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 mediaQuery.addEventListener("change", (e) => {
-    // Solo cambiar si el usuario no ha establecido una preferencia manual
     if (!localStorage.getItem("tema")) {
         if (e.matches) {
             aplicarTema("oscuro");
@@ -229,7 +210,6 @@ mediaQuery.addEventListener("change", (e) => {
     }
 });
 
-// ===== PREVENIR ENVÍO DUPLICADO (evita múltiples clics) =====
 let enviando = false;
 formulario.addEventListener("submit", (e) => {
     if (enviando) {
